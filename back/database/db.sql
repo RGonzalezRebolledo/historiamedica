@@ -1,6 +1,6 @@
 -- consultas sql para crear la BD
 
--- CREATE DATABASE medical;
+ CREATE DATABASE medical;
 
 -- CREATE TABLE users (
 --     id SERIAL PRIMARY KEY,
