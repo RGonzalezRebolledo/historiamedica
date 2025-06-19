@@ -20,10 +20,8 @@
 -- Creación de la tabla Doctores (o Usuarios)
 CREATE TABLE Usuarios (
     id_usuario SERIAL PRIMARY KEY,
-    nombre_usuario VARCHAR(50) UNIQUE NOT NULL,
     password_hash VARCHAR(255) NOT NULL, -- Almacenar hashes de contraseñas, no contraseñas en texto plano
     nombre VARCHAR(100) NOT NULL,
-    apellido VARCHAR(100) NOT NULL,
     especialidad VARCHAR(100),
     licencia_medica VARCHAR(50) UNIQUE,
     email VARCHAR(100) UNIQUE,
@@ -128,3 +126,6 @@ CREATE TABLE ExamenFisico (
 --     notas_diagnostico TEXT,
 --     FOREIGN KEY (id_consulta) REFERENCES Consultas(id_consulta)
 -- ); -->
+
+
+ALTER TABLE Usuarios DROP COLUMN nombre_usuario, DROP COLUMN apellido;
