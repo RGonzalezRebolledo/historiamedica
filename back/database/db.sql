@@ -116,16 +116,4 @@ CREATE TABLE ExamenFisico (
     FOREIGN KEY (id_consulta) REFERENCES Consultas(id_consulta)
 );
 
--- Creación de la tabla Diagnosticos
--- CREATE TABLE Diagnosticos (
---     id_diagnostico SERIAL PRIMARY KEY,
---     id_consulta INT NOT NULL,
---     codigo_cie VARCHAR(20), -- Código internacional de enfermedades (CIE-10, CIE-11, etc.)
---     descripcion_diagnostico TEXT NOT NULL,
---     es_principal BOOLEAN DEFAULT TRUE, -- Indica si es el diagnóstico principal de la consulta
---     notas_diagnostico TEXT,
---     FOREIGN KEY (id_consulta) REFERENCES Consultas(id_consulta)
--- ); -->
-
-
 ALTER TABLE Usuarios DROP COLUMN nombre_usuario, DROP COLUMN apellido;
