@@ -5,6 +5,7 @@ import cors from 'cors'
 import routerUsers from './routes/users.route.js'
 import routerPatients from './routes/patients.route.js'
 import routerLogin from './routes/login.route.js'
+import routerHistory from './routes/history.route.js'
 
 
 
@@ -28,6 +29,7 @@ app.use((err, req, res, next) => {
   app.use(routerUsers)
   app.use(routerPatients)
   app.use(routerLogin)
+  app.use(routerHistory)
 app.listen (pgdb.PORT)
 console.log ('conectado en el puerto', pgdb.PORT)
 

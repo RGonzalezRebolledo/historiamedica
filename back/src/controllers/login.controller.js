@@ -5,7 +5,7 @@ export const validateUser = async (req,res,next) => {
     const {email,password_hash} = req.body
     
     try {
-        const resultUser = await pool.query ('SELECT email,password_hash FROM usuarios WHERE email = $1 OR password_hash = $2', [email,password_hash])
+        const resultUser = await pool.query ('SELECT email,password_hash FROM usuarios WHERE email = $1' , [email])
 
         if (resultUser.rows.length > 0) {
 
