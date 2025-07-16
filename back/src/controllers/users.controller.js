@@ -1,4 +1,6 @@
+import bcryptjs from 'bcryptjs'
 import { pool } from "../db.js";
+import jwt from 'jsonwebtoken'
 
 // FUNCION PARA VALIDAR EL MAIL Y LA LICENCIA
 
@@ -103,6 +105,12 @@ export const createUser = async (req, res, next) => {
       .json({ error: "todos los datos son requeridos, verifique" });
   }
 
+
+  // CREO EL HASH DEL PASSWORD
+  // creo saltos para evitar crear hash iguales en caso que las contrasenas sean iguales
+const salt = await bcryptjs.genSalt (10) 
+// creo el hash
+const hashedpassword = await bcryptjs.hash(password_hash,salt)
   try {
     
         // 1. Verificar la existencia del usuario antes de proceder
@@ -116,10 +124,20 @@ export const createUser = async (req, res, next) => {
         }
 
     const newUser = await pool.query(
-      "INSERT INTO Usuarios (password_hash, nombre, especialidad,licencia_medica,email) VALUES ($1,$2,$3,$4,$5)",
-      [password_hash, nombre, especialidad, licencia_medica, email]
+      "INSERT INTO Usuarios (password_hash, nombre, especialidad,licencia_medica,email) VALUES ($1,$2,$3,$4,$5) RETURNING *",
+      [hashedpassword, nombre, especialidad, licencia_medica, email]
     );
-    res.status(201).json({ mensaje: "usuario registrado con exito" });
+
+      // creo el token 
+      const token = jwt.sign ({
+        email: newUser.rows.email
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: '1h'
+      }
+      )
+    res.status(201).json({ mensaje: token });
   
   } catch (error) {
     console.log(error);

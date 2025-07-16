@@ -381,7 +381,7 @@ export const getConsultationsByPatientId = async (req, res, next) => {
             WHERE
                 c.id_paciente = $1 -- <--- ¡Esta es la clave para filtrar por paciente!
             ORDER BY
-                c.fecha_consulta DESC;
+                c.id_consulta DESC;
         `, [id_paciente]); // <--- Pasar el id_paciente como parámetro de la consulta
 
         if (result.rows.length === 0) {

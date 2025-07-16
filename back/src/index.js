@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import express from 'express'
 import { pgdb } from './config.js'
 import morgan  from 'morgan'
